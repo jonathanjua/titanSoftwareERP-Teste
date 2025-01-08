@@ -17,12 +17,11 @@ class User {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create($name, $email, $password) {
-        $query = "INSERT INTO " . $this->table . " (name, email, password) VALUES (:name, :email, :password)";
+    public function create($email, $password) {
+        $query = "INSERT INTO " . $this->table . " (login, password) VALUES (:login, :password)";
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':login', $email);
         $stmt->bindParam(':password', password_hash($password, PASSWORD_DEFAULT));
 
         return $stmt->execute();
@@ -37,9 +36,9 @@ class User {
     }
 
     public function findByEmail($email) {
-        $query = "SELECT * FROM " . $this->table . " WHERE email = :email";
+        $query = "SELECT * FROM " . $this->table . " WHERE login = :login";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':login', $email);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }

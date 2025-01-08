@@ -103,7 +103,7 @@
 <body>
     <div class="login-container">
         <h1>Login</h1>
-        <form method="POST" action="/auth/login" onsubmit="validateForm(event)">
+        <form method="POST" action="auth/login" onsubmit="validateForm(event)">
             <div class="form-group">
                 <label for="login">Login (Email):</label>
                 <input type="email" id="login" name="login" placeholder="Digite seu email">
@@ -127,9 +127,7 @@
         const passwordField = document.getElementById('password');
         let isValid = true;
 
-
         document.querySelectorAll('.error').forEach(error => error.textContent = '');
-
 
         if (!emailField.value) {
             document.getElementById('loginError').textContent = 'O campo de login é obrigatório.';
